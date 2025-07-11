@@ -1,12 +1,17 @@
-"use client";
-
 import CalendarComponent from "@/components/calendar-component";
 import CalendarIcon from "@/svgs/calendar-icon";
 import PlusIcon from "@/svgs/plus-icon";
 import Link from "next/link";
 import EventsResume from "@/components/events-resume";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-export default function Home() {
+export default async function Home() {
+  const verifyCookies = await cookies();
+  const token = verifyCookies.has("auth");
+  if (!token) {
+    redirect("/login");
+  }
   return (
     <div>
       <header className="flex py-4 justify-between items-center p-2">
