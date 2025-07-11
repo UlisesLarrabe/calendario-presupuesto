@@ -32,7 +32,7 @@ const CalendarComponent = () => {
       <Calendar
         events={events}
         localizer={localizer}
-        style={{ height: 900, minWidth: "70vw" }}
+        style={{ height: "100dvh", width: "100%" }}
         messages={messages}
         selectable={true}
         // view="month"
