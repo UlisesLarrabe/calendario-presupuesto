@@ -3,12 +3,10 @@
 import CalendarComponent from "@/components/calendar-component";
 import CalendarIcon from "@/svgs/calendar-icon";
 import PlusIcon from "@/svgs/plus-icon";
-import useEventsContext from "@/hooks/use-events-context";
 import Link from "next/link";
+import EventsResume from "@/components/events-resume";
 
 export default function Home() {
-  const { events } = useEventsContext();
-  console.log(events);
   return (
     <div>
       <header className="flex py-4 justify-between items-center p-2">
@@ -26,7 +24,14 @@ export default function Home() {
           </Link>
         </div>
       </header>
-      <CalendarComponent />
+      <main className="w-full flex gap-4 ">
+        <div className="w-2/3">
+          <CalendarComponent />
+        </div>
+        <div className="w-1/3">
+          <EventsResume />
+        </div>
+      </main>
     </div>
   );
 }
