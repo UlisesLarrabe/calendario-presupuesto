@@ -17,6 +17,10 @@ const CalendarComponent = () => {
     previous: "Anterior",
     next: "Siguiente",
     today: "Hoy",
+    month: "Mes",
+    week: "Semana",
+    day: "Dia",
+    agenda: "Agenda",
   };
 
   const components = {
