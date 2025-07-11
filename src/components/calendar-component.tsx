@@ -3,15 +3,32 @@
 import useEventsContext from "@/hooks/use-events-context";
 import dayjs from "dayjs";
 import "dayjs/locale/es";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+import isBetween from "dayjs/plugin/isBetween";
+import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
+import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import { Calendar, dayjsLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import EventComponent from "./event-component";
 
 dayjs.locale("es");
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.extend(isBetween);
+dayjs.extend(isSameOrAfter);
+dayjs.extend(isSameOrBefore);
 const localizer = dayjsLocalizer(dayjs);
 
 const CalendarComponent = () => {
   const { events } = useEventsContext();
+  const eventsWithTimezone = events.map((event) => {
+    return {
+      ...event,
+      start: dayjs(event.start).tz("America/Argentina/Buenos_Aires").toDate(),
+      end: dayjs(event.end).tz("America/Argentina/Buenos_Aires").toDate(),
+    };
+  });
 
   const messages = {
     previous: "Anterior",
@@ -34,7 +51,7 @@ const CalendarComponent = () => {
   return (
     <div>
       <Calendar
-        events={events}
+        events={eventsWithTimezone}
         localizer={localizer}
         style={{ height: "100dvh", width: "100%" }}
         messages={messages}

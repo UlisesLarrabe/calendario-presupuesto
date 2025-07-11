@@ -12,8 +12,11 @@
     "@fontsource-variable/onest": "^5.2.9",
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.50.4",
+    "@types/react-big-calendar": "^1.16.2",
+    "dayjs": "^1.11.13",
     "next": "15.3.5",
     "react": "^19.0.0",
+    "react-big-calendar": "^1.19.4",
     "react-dom": "^19.0.0",
     "react-hot-toast": "^2.5.2"
   },
