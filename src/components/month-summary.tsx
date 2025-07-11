@@ -41,7 +41,7 @@ const MonthSummary = () => {
 
   return (
     <details
-      className={`w-[95%] rounded-lg ${colors.backgroundDetails} mb-2`}
+      className={`w-full md:w-[95%] rounded-lg ${colors.backgroundDetails} mb-2`}
       open
     >
       <summary

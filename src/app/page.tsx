@@ -29,11 +29,11 @@ export default async function Home() {
           </Link>
         </div>
       </header>
-      <main className="w-full flex gap-4 ">
-        <div className="w-2/3">
+      <main className="w-full flex flex-col md:flex-row gap-4 ">
+        <div className="w-full md:w-2/3">
           <CalendarComponent />
         </div>
-        <div className="w-1/3">
+        <div className="w-full md:w-1/3">
           <EventsResume />
         </div>
       </main>

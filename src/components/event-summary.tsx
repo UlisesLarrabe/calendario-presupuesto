@@ -17,7 +17,8 @@ const EventSummary = ({
   // Nueva paleta y estilos modernos
   const colorsIncome = {
     backgroundDetails: "bg-green-100 border border-green-200 shadow-md",
-    backgroundArticle: "bg-white hover:bg-green-50 transition-colors duration-200 border border-green-100",
+    backgroundArticle:
+      "bg-white hover:bg-green-50 transition-colors duration-200 border border-green-100",
     backgroundSummary: "bg-green-50",
     colorText: "text-green-900",
     colorButton: "bg-green-500 hover:bg-green-600 text-white shadow-md",
@@ -25,7 +26,8 @@ const EventSummary = ({
   };
   const colorsOutcome = {
     backgroundDetails: "bg-red-100 border border-red-200 shadow-md",
-    backgroundArticle: "bg-white hover:bg-red-50 transition-colors duration-200 border border-red-100",
+    backgroundArticle:
+      "bg-white hover:bg-red-50 transition-colors duration-200 border border-red-100",
     backgroundSummary: "bg-red-50",
     colorText: "text-red-900",
     colorButton: "bg-red-500 hover:bg-red-600 text-white shadow-md",
@@ -33,7 +35,8 @@ const EventSummary = ({
   };
   const colorsIncomeOutcome = {
     backgroundDetails: "bg-yellow-50 border border-yellow-200 shadow-md",
-    backgroundArticle: "bg-white hover:bg-yellow-50 transition-colors duration-200 border border-yellow-100",
+    backgroundArticle:
+      "bg-white hover:bg-yellow-50 transition-colors duration-200 border border-yellow-100",
     backgroundSummary: "bg-yellow-50",
     colorText: "text-yellow-900",
     colorButton: "bg-yellow-400 hover:bg-yellow-500 text-white shadow-md",
@@ -63,7 +66,7 @@ const EventSummary = ({
   };
   return (
     <details
-      className={`border w-[95%] border-gray-200 rounded-lg ${colors.backgroundDetails}`}
+      className={`border md:w-[95%] w-full border-gray-200 rounded-lg ${colors.backgroundDetails}`}
     >
       <summary
         className={`text-lg font-semibold p-4 cursor-pointer ${colors.colorText}`}
@@ -86,8 +89,8 @@ const EventSummary = ({
                 className={`px-3 py-1 rounded-full text-xs font-bold shadow-sm border select-none transition-colors duration-200
                   ${
                     event.isDone
-                    ? "bg-green-200 text-green-900 border-green-300"
-                    : "bg-orange-200 text-orange-900 border-orange-300"
+                      ? "bg-green-200 text-green-900 border-green-300"
+                      : "bg-orange-200 text-orange-900 border-orange-300"
                   }
                 `}
               >
