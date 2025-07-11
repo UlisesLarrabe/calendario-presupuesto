@@ -108,9 +108,9 @@ const Agregar = () => {
                 className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
                 required
               >
-                <option value="otros">otros</option>
-                <option value="compras">compras</option>
-                <option value="cobros">cobros</option>
+                <option value="Otros">Otros</option>
+                <option value="Compras">Compras</option>
+                <option value="Cobros">Cobros</option>
               </select>
             </div>
 
