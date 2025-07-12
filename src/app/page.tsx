@@ -17,7 +17,7 @@ export default async function Home() {
       <header className="flex py-4 justify-between items-center p-2">
         <div className="flex items-center gap-2">
           <CalendarIcon />
-          <h1 className="text-3xl">Calendario de Presupuesto</h1>
+          <h1 className="text-3xl">MA&GA PF</h1>
         </div>
         <div>
           <Link
