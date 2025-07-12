@@ -8,7 +8,6 @@ const page = async () => {
   if (!token) {
     redirect("/login");
   }
-  console.log("token", token);
   return <AddEvent />;
 };
 export default page;
