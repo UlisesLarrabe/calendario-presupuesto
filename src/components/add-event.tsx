@@ -45,6 +45,30 @@ const AddEvent = () => {
     setType("income");
   };
 
+  const categories = [
+    "Gastos",
+    "Ingresos Brutos",
+    "IVA",
+    "Tarjeta Visa P",
+    "Tarjeta Visa G",
+    "Tarjeta Mastercard P",
+    "Tarjeta Mastercard G",
+    "Luz",
+    "Gas",
+    "Internet",
+    "Claro G",
+    "Claro E",
+    "Patente",
+    "Estrada",
+    "Imp Inmobiliario",
+    "Autonomos",
+    "Caja Pcia CPBA",
+    "Expensas",
+    "Cintia M",
+    "Lourdes L",
+    "Del Fabbro M",
+  ];
+
   return (
     <>
       <Toaster />
@@ -109,8 +133,11 @@ const AddEvent = () => {
                 required
               >
                 <option value="Otros">Otros</option>
-                <option value="Compras">Compras</option>
-                <option value="Cobros">Cobros</option>
+                {categories.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
               </select>
             </div>
 
