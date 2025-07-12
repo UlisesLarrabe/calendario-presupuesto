@@ -21,7 +21,7 @@ dayjs.extend(isSameOrBefore);
 const localizer = dayjsLocalizer(dayjs);
 
 const CalendarComponent = () => {
-  const { events } = useEventsContext();
+  const { events, getEventsByMonth } = useEventsContext();
   const eventsWithTimezone = events.map((event) => {
     return {
       ...event,
@@ -48,6 +48,12 @@ const CalendarComponent = () => {
     },
   };
 
+  const handleNavigate = ({ date }: { date: Date }) => {
+    const month = dayjs(date).month() + 1;
+    const year = dayjs(date).year();
+    getEventsByMonth(month, year);
+  };
+
   return (
     <div>
       <Calendar
@@ -59,6 +65,7 @@ const CalendarComponent = () => {
         // view="month"
         // views={["month"]}
         components={components}
+        onNavigate={(newDate) => handleNavigate({ date: newDate })}
       />
     </div>
   );
