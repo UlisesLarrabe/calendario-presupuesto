@@ -8,6 +8,8 @@ import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
 const AddEvent = () => {
+  const persons = ["GAL", "MEL"];
+
   const { addEvent } = useEventsContext();
   const [title, setTitle] = useState("");
   const [start, setStart] = useState(dayjs());
@@ -18,6 +20,7 @@ const AddEvent = () => {
   const [amount, setAmount] = useState(0);
   const [type, setType] = useState("income");
   const [loading, setLoading] = useState(false);
+  const [person, setPerson] = useState(persons[0]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,6 +36,7 @@ const AddEvent = () => {
       year: start.year(),
       type,
       isDone,
+      person,
     };
     await addEvent(event);
     toast.success("Evento agregado exitosamente");
@@ -143,18 +147,20 @@ const AddEvent = () => {
 
             <div>
               <label className="block text-sm font-semibold mb-1 text-gray-700">
-                Fecha
+                Persona
               </label>
-              <input
-                type="date"
-                value={start.format("YYYY-MM-DD")}
-                onChange={(e) => {
-                  setStart(dayjs(e.target.value));
-                  setEnd(dayjs(e.target.value));
-                }}
+              <select
+                value={person}
+                onChange={(e) => setPerson(e.target.value)}
                 className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
                 required
-              />
+              >
+                {persons.map((person) => (
+                  <option key={person} value={person}>
+                    {person}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <button

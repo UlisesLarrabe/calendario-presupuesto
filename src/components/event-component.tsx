@@ -19,7 +19,7 @@ const EventComponent = ({ event }: { event: Event }) => {
       } overflow-hidden p-1 rounded-sm cursor-pointer `}
     >
       <h3 className={`text-white text-sm`}>
-        {event.title} - ${event.amount}
+        {event.title} ({event.person}) - ${event.amount}
       </h3>
     </article>
   );

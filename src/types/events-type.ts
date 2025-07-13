@@ -10,4 +10,5 @@ export interface Event {
   year: number;
   type: string;
   isDone: boolean;
+  person: string;
 }
