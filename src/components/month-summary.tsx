@@ -57,25 +57,25 @@ const MonthSummary = () => {
           <div className="flex flex-col items-center">
             <span className="text-xs text-gray-500">Total ingresado</span>
             <span className="text-green-600 font-bold text-lg">
-              ${totalIngresado}
+              ${totalIngresado.toLocaleString("es-ES")}
             </span>
           </div>
           <div className="flex flex-col items-center">
             <span className="text-xs text-gray-500">Total pagado</span>
             <span className="text-red-600 font-bold text-lg">
-              ${totalPagado}
+              ${totalPagado.toLocaleString("es-ES")}
             </span>
           </div>
           <div className="flex flex-col items-center">
             <span className="text-xs text-gray-500">Falta cobrar</span>
             <span className="text-yellow-600 font-bold text-lg">
-              ${faltaCobrar}
+              ${faltaCobrar.toLocaleString("es-ES")}
             </span>
           </div>
           <div className="flex flex-col items-center">
             <span className="text-xs text-gray-500">Falta pagar</span>
             <span className="text-orange-500 font-bold text-lg">
-              ${faltaPagar}
+              ${faltaPagar.toLocaleString("es-ES")}
             </span>
           </div>
         </section>
@@ -93,7 +93,8 @@ const MonthSummary = () => {
                 key={cat}
                 className={`rounded-lg px-3 py-2 ${colors.backgroundArticle} border border-green-100`}
               >
-                <span className="font-semibold">{cat}:</span> ${total}
+                <span className="font-semibold">{cat}:</span> $
+                {total.toLocaleString("es-ES")}
               </div>
             ))}
           </div>
@@ -112,7 +113,8 @@ const MonthSummary = () => {
                 key={cat}
                 className={`rounded-lg px-3 py-2 ${colors.backgroundArticle} border border-red-100`}
               >
-                <span className="font-semibold">{cat}:</span> ${total}
+                <span className="font-semibold">{cat}:</span> $
+                {total.toLocaleString("es-ES")}
               </div>
             ))}
           </div>
