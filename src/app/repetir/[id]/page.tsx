@@ -1,12 +1,8 @@
 import AddEventWithOtherDate from "@/components/add-event-with-other-date";
 import { createClient } from "@/utils/supabase/server";
 
-const page = async ({
-  searchParams,
-}: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}) => {
-  const { id } = await searchParams;
+const page = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = await params;
   const supabase = await createClient();
   const { data: event } = await supabase
     .from("events")
