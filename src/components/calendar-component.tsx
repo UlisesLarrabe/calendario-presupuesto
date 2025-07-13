@@ -11,6 +11,7 @@ import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import { Calendar, dayjsLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import EventComponent from "./event-component";
+import { Event } from "@/types/events-type";
 
 dayjs.locale("es");
 dayjs.extend(utc);
@@ -54,6 +55,10 @@ const CalendarComponent = () => {
     getEventsByMonth(month, year);
   };
 
+  const handleDoubleClickEvent = (event: Event) => {
+    window.location.href = `/evento/${event.id}`;
+  };
+
   return (
     <div>
       <Calendar
@@ -66,6 +71,7 @@ const CalendarComponent = () => {
         // views={["month"]}
         components={components}
         onNavigate={(newDate) => handleNavigate({ date: newDate })}
+        onDoubleClickEvent={handleDoubleClickEvent}
       />
     </div>
   );

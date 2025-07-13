@@ -3,14 +3,15 @@
 import Header from "@/components/header";
 import useEventsContext from "@/hooks/use-events-context";
 import { Event } from "@/types/events-type";
+import { createClient } from "@/utils/supabase/client";
 import dayjs from "dayjs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
-const AddEvent = () => {
+const AddEvent = ({ id }: { id?: string }) => {
   const persons = ["GAL", "MEL"];
 
-  const { addEvent } = useEventsContext();
+  const { addEvent, updateEvent } = useEventsContext();
   const [title, setTitle] = useState("");
   const [start, setStart] = useState(dayjs());
   const [end, setEnd] = useState(dayjs());
@@ -21,6 +22,26 @@ const AddEvent = () => {
   const [type, setType] = useState("income");
   const [loading, setLoading] = useState(false);
   const [person, setPerson] = useState(persons[0]);
+
+  useEffect(() => {
+    if (id) {
+      const supabase = createClient();
+      supabase
+        .from("events")
+        .select("*")
+        .eq("id", id)
+        .single()
+        .then(({ data }) => {
+          setTitle(data.title);
+          setStart(dayjs(data.start));
+          setEnd(dayjs(data.end));
+          setCategory(data.category);
+          setAmount(data.amount);
+          setType(data.type);
+          setPerson(data.person);
+        });
+    }
+  }, [id]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,8 +59,13 @@ const AddEvent = () => {
       isDone,
       person,
     };
-    await addEvent(event);
-    toast.success("Evento agregado exitosamente");
+    if (id) {
+      await updateEvent(id, event);
+      toast.success("Evento actualizado exitosamente");
+    } else {
+      await addEvent(event);
+      toast.success("Evento agregado exitosamente");
+    }
     setLoading(false);
     setTitle("");
     setStart(dayjs());
@@ -75,7 +101,7 @@ const AddEvent = () => {
 
   return (
     <>
-      <Toaster />
+      <Toaster position="bottom-center" />
       <Header />
       <main className="flex flex-col items-center justify-center min-h-screen bg-white p-4 pt-24">
         <div className="bg-white shadow-xl rounded-xl p-8 w-full max-w-md">

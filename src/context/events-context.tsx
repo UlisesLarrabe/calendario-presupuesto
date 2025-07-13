@@ -22,6 +22,8 @@ interface EventsContextType {
   ) => Promise<Event[]>;
   getOutDatedOutcomeEvents: () => Promise<Event[]>;
   getIncomeOutcomeEvents: () => Promise<Event[]>;
+  updateEvent: (id: string, event: Event) => Promise<void>;
+  deleteEvent: (id: string) => Promise<void>;
 }
 
 export const EventsContext = createContext<EventsContextType | null>(null);
@@ -119,6 +121,28 @@ export const EventsContextProvider = ({
     return events as Event[];
   };
 
+  const updateEvent = async (id: string, event: Event) => {
+    const { data, error } = await supabase
+      .from("events")
+      .update(event)
+      .eq("id", id)
+      .select();
+    if (error) {
+      throw new Error("Error al actualizar un evento");
+    }
+    setEvents((prevEvents) =>
+      prevEvents.map((event) => (event.id === id ? data[0] : event))
+    );
+  };
+
+  const deleteEvent = async (id: string) => {
+    const { error } = await supabase.from("events").delete().eq("id", id);
+    if (error) {
+      throw new Error("Error al eliminar un evento");
+    }
+    setEvents((prevEvents) => prevEvents.filter((event) => event.id !== id));
+  };
+
   useEffect(() => {
     getEventsByMonth(dayjs().month() + 1, dayjs().year());
   }, []);
@@ -130,6 +154,8 @@ export const EventsContextProvider = ({
         setEvents,
         getEventsByMonth,
         addEvent,
+        updateEvent,
+        deleteEvent,
         getEventsByMonthAndCategory,
         getEventsByMonthAndType,
         getOutDatedOutcomeEvents,
