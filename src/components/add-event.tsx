@@ -189,6 +189,22 @@ const AddEvent = ({ id }: { id?: string }) => {
               </select>
             </div>
 
+            <div>
+              <label className="block text-sm font-semibold mb-1 text-gray-700">
+                Fecha
+              </label>
+              <input
+                type="date"
+                value={start.format("YYYY-MM-DD")}
+                onChange={(e) => {
+                  setStart(dayjs(e.target.value));
+                  setEnd(dayjs(e.target.value));
+                }}
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
+                required
+              />
+            </div>
+
             <button
               type="submit"
               className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 rounded-lg transition-colors shadow-md disabled:opacity-50"
