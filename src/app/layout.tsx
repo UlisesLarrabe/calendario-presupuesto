@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="es">
       <EventsContextProvider>
         <body className="antialiased w-full h-full">{children}</body>
       </EventsContextProvider>
