@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Header = () => {
   return (
-    <header className="w-full bg-white shadow-sm py-4 px-6 flex items-center justify-between fixed top-0 left-0 z-10">
+    <header className="w-full bg-white shadow-sm py-4 px-6 flex items-center justify-between  top-0 left-0 z-10">
       <Link
         href="/"
         className="text-purple-700 font-semibold text-lg hover:underline flex items-center gap-2"
