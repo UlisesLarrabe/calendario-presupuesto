@@ -67,8 +67,6 @@ const CalendarComponent = () => {
         style={{ height: "100dvh", width: "100%" }}
         messages={messages}
         selectable={true}
-        // view="month"
-        // views={["month"]}
         components={components}
         onNavigate={(newDate) => handleNavigate({ date: newDate })}
         onDoubleClickEvent={handleDoubleClickEvent}
