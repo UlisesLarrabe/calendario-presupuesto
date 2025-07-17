@@ -1,5 +1,6 @@
 "use client";
 import useEventsContext from "@/hooks/use-events-context";
+import { useMemo } from "react";
 
 const MonthSummary = () => {
   const { events: monthEvents } = useEventsContext();
@@ -15,30 +16,37 @@ const MonthSummary = () => {
     });
     return grouped;
   };
-  const incomesByCat = groupByCategory("income");
-  const outcomesByCat = groupByCategory("outcome");
+  const incomesByCat = useMemo(() => groupByCategory("income"), [monthEvents]);
+  const outcomesByCat = useMemo(
+    () => groupByCategory("outcome"),
+    [monthEvents]
+  );
 
   // Totales
-  const totalIngresado = monthEvents && monthEvents.length > 0
-    ? monthEvents
-      .filter((e) => e.type === "income" && e.isDone)
-      .reduce((acc, e) => acc + e.amount, 0)
-    : 0;
-  const totalPagado = monthEvents && monthEvents.length > 0
-    ? monthEvents
-      .filter((e) => e.type === "outcome" && e.isDone)
-      .reduce((acc, e) => acc + e.amount, 0)
-    : 0;
-  const faltaCobrar = monthEvents && monthEvents.length > 0
-    ? monthEvents
-      .filter((e) => e.type === "income" && !e.isDone)
-      .reduce((acc, e) => acc + e.amount, 0)
-    : 0;
-  const faltaPagar = monthEvents && monthEvents.length > 0
-    ? monthEvents
-      .filter((e) => e.type === "outcome" && !e.isDone)
-      .reduce((acc, e) => acc + e.amount, 0)
-    : 0;
+  const totalIngresado =
+    monthEvents && monthEvents.length > 0
+      ? monthEvents
+          .filter((e) => e.type === "income" && e.isDone)
+          .reduce((acc, e) => acc + e.amount, 0)
+      : 0;
+  const totalPagado =
+    monthEvents && monthEvents.length > 0
+      ? monthEvents
+          .filter((e) => e.type === "outcome" && e.isDone)
+          .reduce((acc, e) => acc + e.amount, 0)
+      : 0;
+  const faltaCobrar =
+    monthEvents && monthEvents.length > 0
+      ? monthEvents
+          .filter((e) => e.type === "income" && !e.isDone)
+          .reduce((acc, e) => acc + e.amount, 0)
+      : 0;
+  const faltaPagar =
+    monthEvents && monthEvents.length > 0
+      ? monthEvents
+          .filter((e) => e.type === "outcome" && !e.isDone)
+          .reduce((acc, e) => acc + e.amount, 0)
+      : 0;
 
   // Colores blancos y suaves
   const colors = {
