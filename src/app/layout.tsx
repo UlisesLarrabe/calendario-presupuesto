@@ -15,9 +15,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <EventsContextProvider>
-        <body className="antialiased w-full h-full">{children}</body>
-      </EventsContextProvider>
+      <body className="antialiased w-full h-full">
+        <EventsContextProvider>
+          {children}
+        </EventsContextProvider>
+      </body>
     </html>
   );
 }
