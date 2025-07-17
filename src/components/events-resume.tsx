@@ -7,19 +7,25 @@ import EventSummary from "./event-summary";
 import MonthSummary from "./month-summary";
 const EventsResume = () => {
   const { events } = useEventsContext();
-  const incomeEvents = events
-    .filter((e) => e.type === "income")
-    .sort((a, b) => (dayjs(a.start).isBefore(dayjs(b.start)) ? -1 : 1));
-  const outDatedOutcomeEvents = events
-    .filter(
-      (e: Event) => e.type === "outcome" && dayjs(e.start).isBefore(dayjs())
-    )
-    .sort((a, b) => (dayjs(a.start).isBefore(dayjs(b.start)) ? -1 : 1));
-  const incomeOutcomeEvents = events
-    .filter(
-      (e: Event) => e.type === "outcome" && dayjs(e.start).isAfter(dayjs())
-    )
-    .sort((a, b) => (dayjs(a.start).isBefore(dayjs(b.start)) ? -1 : 1));
+  const incomeEvents = events && events.length > 0
+    ? events
+      .filter((e) => e.type === "income")
+      .sort((a, b) => (dayjs(a.start).isBefore(dayjs(b.start)) ? -1 : 1))
+    : [];
+  const outDatedOutcomeEvents = events && events.length > 0
+    ? events
+      .filter(
+        (e: Event) => e.type === "outcome" && dayjs(e.start).isBefore(dayjs())
+      )
+      .sort((a, b) => (dayjs(a.start).isBefore(dayjs(b.start)) ? -1 : 1))
+    : [];
+  const incomeOutcomeEvents = events && events.length > 0
+    ? events
+      .filter(
+        (e: Event) => e.type === "outcome" && dayjs(e.start).isAfter(dayjs())
+      )
+      .sort((a, b) => (dayjs(a.start).isBefore(dayjs(b.start)) ? -1 : 1))
+    : [];
 
   return (
     <div className="flex flex-col gap-4">

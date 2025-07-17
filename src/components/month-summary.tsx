@@ -6,6 +6,7 @@ const MonthSummary = () => {
 
   // Agrupar por categoría
   const groupByCategory = (type: string) => {
+    if (!monthEvents || monthEvents.length === 0) return {};
     const filtered = monthEvents.filter((e) => e.type === type);
     const grouped: Record<string, { total: number }> = {};
     filtered.forEach((e) => {
@@ -18,18 +19,26 @@ const MonthSummary = () => {
   const outcomesByCat = groupByCategory("outcome");
 
   // Totales
-  const totalIngresado = monthEvents
-    .filter((e) => e.type === "income" && e.isDone)
-    .reduce((acc, e) => acc + e.amount, 0);
-  const totalPagado = monthEvents
-    .filter((e) => e.type === "outcome" && e.isDone)
-    .reduce((acc, e) => acc + e.amount, 0);
-  const faltaCobrar = monthEvents
-    .filter((e) => e.type === "income" && !e.isDone)
-    .reduce((acc, e) => acc + e.amount, 0);
-  const faltaPagar = monthEvents
-    .filter((e) => e.type === "outcome" && !e.isDone)
-    .reduce((acc, e) => acc + e.amount, 0);
+  const totalIngresado = monthEvents && monthEvents.length > 0
+    ? monthEvents
+      .filter((e) => e.type === "income" && e.isDone)
+      .reduce((acc, e) => acc + e.amount, 0)
+    : 0;
+  const totalPagado = monthEvents && monthEvents.length > 0
+    ? monthEvents
+      .filter((e) => e.type === "outcome" && e.isDone)
+      .reduce((acc, e) => acc + e.amount, 0)
+    : 0;
+  const faltaCobrar = monthEvents && monthEvents.length > 0
+    ? monthEvents
+      .filter((e) => e.type === "income" && !e.isDone)
+      .reduce((acc, e) => acc + e.amount, 0)
+    : 0;
+  const faltaPagar = monthEvents && monthEvents.length > 0
+    ? monthEvents
+      .filter((e) => e.type === "outcome" && !e.isDone)
+      .reduce((acc, e) => acc + e.amount, 0)
+    : 0;
 
   // Colores blancos y suaves
   const colors = {

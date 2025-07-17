@@ -18,21 +18,27 @@ const AddEventWithOtherDate = ({ event }: { event: Event | undefined }) => {
     e.preventDefault();
     if (!event) return;
     setLoading(true);
-    await addEvent({
-      title: event.title,
-      start: date.toDate(),
-      end: date.toDate(),
-      month: date.month() + 1,
-      year: date.year(),
-      allDay: event.allDay,
-      category: event.category,
-      amount: event.amount,
-      type: event.type,
-      isDone: false,
-      person: event.person,
-    });
-    toast.success("Evento agregado exitosamente");
-    setLoading(false);
+    try {
+      await addEvent({
+        title: event.title,
+        start: date.toDate(),
+        end: date.toDate(),
+        month: date.month() + 1,
+        year: date.year(),
+        allDay: event.allDay,
+        category: event.category,
+        amount: event.amount,
+        type: event.type,
+        isDone: false,
+        person: event.person,
+      });
+      toast.success("Evento agregado exitosamente");
+    } catch (error) {
+      console.error('Error al agregar evento repetido:', error);
+      toast.error("Error al agregar el evento");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
