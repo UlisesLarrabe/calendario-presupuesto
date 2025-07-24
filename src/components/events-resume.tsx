@@ -5,6 +5,7 @@ import useEventsContext from "@/hooks/use-events-context";
 import { Event } from "@/types/events-type";
 import EventSummary from "./event-summary";
 import MonthSummary from "./month-summary";
+import ChartSummary from "./chart-summary";
 const EventsResume = () => {
   const { events } = useEventsContext();
   const incomeEvents =
@@ -27,6 +28,7 @@ const EventsResume = () => {
   return (
     <div className="flex flex-col gap-4">
       <MonthSummary />
+      <ChartSummary />
       <EventSummary events={incomeEvents} title="Ingresos" />
       <EventSummary events={outDatedOutcomeEvents} title="Pagos vencidos" />
       <EventSummary

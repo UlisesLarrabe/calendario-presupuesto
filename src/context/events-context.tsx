@@ -5,6 +5,12 @@ import { createClient } from "@/utils/supabase/client";
 import { createContext, useEffect, useState } from "react";
 import dayjs from "dayjs";
 
+interface Summary {
+  type: string;
+  month: number;
+  total: number;
+}
+
 interface EventsContextType {
   events: Event[];
   setEvents: (events: Event[]) => void;
@@ -12,6 +18,7 @@ interface EventsContextType {
   addEvent: (event: Event) => Promise<void>;
   updateEvent: (id: string, event: Event) => Promise<void>;
   deleteEvent: (id: string) => Promise<void>;
+  getSummaryPerMonth: (year: number) => Promise<Summary[]>;
 }
 
 export const EventsContext = createContext<EventsContextType | null>(null);
@@ -71,6 +78,21 @@ export const EventsContextProvider = ({
     setEvents((prevEvents) => prevEvents.filter((event) => event.id !== id));
   };
 
+  const getSummaryPerMonth = async (year: number) => {
+    const { data: summary, error } = await supabase.rpc(
+      "get_summary_per_month",
+      {
+        year_input: year,
+      }
+    );
+
+    if (error) {
+      throw new Error(error?.message || "Error al cargar el resumen");
+    }
+
+    return summary;
+  };
+
   useEffect(() => {
     getEventsByMonth(dayjs().month() + 1, dayjs().year());
   }, []);
@@ -84,6 +106,7 @@ export const EventsContextProvider = ({
         addEvent,
         updateEvent,
         deleteEvent,
+        getSummaryPerMonth,
       }}
     >
       {children}
