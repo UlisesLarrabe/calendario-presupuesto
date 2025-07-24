@@ -25,13 +25,15 @@ export const EventsContextProvider = ({
   const [events, setEvents] = useState<Event[]>([]);
 
   const getEventsByMonth = async (month: number, year: number) => {
-    const { data: events, error } = await supabase
-      .from("events")
-      .select("*")
-      .eq("month", month)
-      .eq("year", year);
+    const { data: events, error } = await supabase.rpc(
+      "get_events_by_month_and_year",
+      {
+        month_input: month,
+        year_input: year,
+      }
+    );
     if (error) {
-      console.error(error);
+      throw new Error(error?.message || "Error al cargar los eventos");
     }
     setEvents(events as Event[]);
   };
