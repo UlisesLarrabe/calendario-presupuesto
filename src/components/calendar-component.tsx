@@ -12,6 +12,8 @@ import { Calendar, dayjsLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import EventComponent from "./event-component";
 import { Event } from "@/types/events-type";
+import { useState } from "react";
+import AgendaCalendar from "./agenda-calendar";
 
 dayjs.locale("es");
 dayjs.extend(utc);
@@ -22,6 +24,7 @@ dayjs.extend(isSameOrBefore);
 const localizer = dayjsLocalizer(dayjs);
 
 const CalendarComponent = () => {
+  const [showAgenda, setShowAgenda] = useState(false);
   const { events, getEventsByMonth } = useEventsContext();
   const eventsWithTimezone = events.map((event) => {
     return {
@@ -59,18 +62,31 @@ const CalendarComponent = () => {
     window.location.href = `/evento/${event.id}`;
   };
 
+  const handleShowAgenda = (view: string) => {
+    if (view != "agenda") {
+      setShowAgenda(false);
+    } else {
+      setShowAgenda(true);
+    }
+  };
+
   return (
     <div>
-      <Calendar
-        events={eventsWithTimezone}
-        localizer={localizer}
-        style={{ height: "100dvh", width: "100%" }}
-        messages={messages}
-        selectable={true}
-        components={components}
-        onNavigate={(newDate) => handleNavigate({ date: newDate })}
-        onDoubleClickEvent={handleDoubleClickEvent}
-      />
+      {showAgenda ? (
+        <AgendaCalendar events={events} setShowAgenda={setShowAgenda} />
+      ) : (
+        <Calendar
+          events={eventsWithTimezone}
+          localizer={localizer}
+          style={{ height: "100dvh", width: "100%" }}
+          messages={messages}
+          selectable={true}
+          components={components}
+          onNavigate={(newDate) => handleNavigate({ date: newDate })}
+          onDoubleClickEvent={handleDoubleClickEvent}
+          onView={(view) => handleShowAgenda(view)}
+        />
+      )}
     </div>
   );
 };
