@@ -13,6 +13,7 @@ const AddEventWithOtherDate = ({ event }: { event: Event | undefined }) => {
   const { addEvent } = useEventsContext();
   const [date, setDate] = useState(dayjs(event?.start).add(1, "month"));
   const [loading, setLoading] = useState(false);
+  const [newAmount, setNewAmount] = useState(event?.amount || 0);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,14 +28,14 @@ const AddEventWithOtherDate = ({ event }: { event: Event | undefined }) => {
         year: date.year(),
         allDay: event.allDay,
         category: event.category,
-        amount: event.amount,
+        amount: newAmount,
         type: event.type,
         isDone: false,
         person: event.person,
       });
       toast.success("Evento agregado exitosamente");
     } catch (error) {
-      console.error('Error al agregar evento repetido:', error);
+      console.error("Error al agregar evento repetido:", error);
       toast.error("Error al agregar el evento");
     } finally {
       setLoading(false);
@@ -42,7 +43,7 @@ const AddEventWithOtherDate = ({ event }: { event: Event | undefined }) => {
   };
 
   return (
-    <div className="w-full h-full flex flex-col gap-6 p-4 justify-center items-center bg-gradient-to-br from-blue-50 to-blue-100 min-h-screen">
+    <div className="w-full h-full flex flex-col gap-6 p-4  items-center bg-gradient-to-br from-blue-50 to-blue-100 min-h-screen">
       <Header />
       <Toaster position="top-center" reverseOrder={false} />
       <section className="w-full max-w-md flex flex-col gap-4 p-4 justify-center items-center">
@@ -67,11 +68,6 @@ const AddEventWithOtherDate = ({ event }: { event: Event | undefined }) => {
                 <span className="bg-blue-50 px-2 py-0.5 rounded">
                   {dayjs(event.start).format("DD/MM/YYYY")}
                 </span>
-                {event.amount && (
-                  <span className="bg-green-50 text-green-700 px-2 py-0.5 rounded font-semibold">
-                    ${event.amount}
-                  </span>
-                )}
               </div>
             </div>
           </div>
@@ -92,6 +88,14 @@ const AddEventWithOtherDate = ({ event }: { event: Event | undefined }) => {
             type="date"
             value={date.format("YYYY-MM-DD")}
             onChange={(e) => setDate(dayjs(e.target.value))}
+          />
+          <label htmlFor="amount">Monto del evento</label>
+          <input
+            type="number"
+            id="amount"
+            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-300 transition"
+            value={newAmount}
+            onChange={(e) => setNewAmount(Number(e.target.value))}
           />
           <button
             className="w-full p-2 mt-2 bg-blue-500 hover:bg-blue-600 transition text-white rounded font-semibold shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:opacity-50 disabled:cursor-not-allowed"
