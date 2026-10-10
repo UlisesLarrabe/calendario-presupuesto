@@ -17,6 +17,7 @@
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.50.4",
     "@types/react-big-calendar": "^1.16.2",
+    "date-fns": "^4.4.0",
     "dayjs": "^1.11.13",
     "next": "15.3.8",
     "react": "^19.0.0",

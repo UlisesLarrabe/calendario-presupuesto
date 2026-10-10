@@ -15,14 +15,14 @@ const EventsResume = () => {
   const outDatedOutcomeEvents =
     events && events.length > 0
       ? events.filter(
-          (e: Event) => e.type === "outcome" && dayjs(e.start).isBefore(dayjs())
-        )
+        (e: Event) => e.type === "outcome" && dayjs(e.start).isBefore(dayjs())
+      )
       : [];
   const incomeOutcomeEvents =
     events && events.length > 0
       ? events.filter(
-          (e: Event) => e.type === "outcome" && dayjs(e.start).isAfter(dayjs())
-        )
+        (e: Event) => e.type === "outcome" && dayjs(e.start).isAfter(dayjs())
+      )
       : [];
 
   return (
