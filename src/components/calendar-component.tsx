@@ -11,6 +11,7 @@ import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import EventComponent from "./event-component";
 import { Calendar as NewCalendar } from '@components/calendar/calendar'
 import { MobileCalendar } from "./calendar/mobile-calendar";
+import MobileEventComponent from "./mobile-event-component";
 
 dayjs.locale("es");
 dayjs.extend(utc);
@@ -43,7 +44,7 @@ const CalendarComponent = () => {
       <div className="justify-center items-center p-2 md:hidden flex">
         <MobileCalendar
           events={eventsWithTimezone}
-          renderEvent={(event) => <EventComponent event={event} />}
+          renderEvent={(event) => <MobileEventComponent event={event} />}
         />
       </div>
     </div>

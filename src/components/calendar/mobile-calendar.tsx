@@ -200,12 +200,13 @@ export function MobileCalendar({ events, renderEvent }: MobileCalendarProps) {
       </div>
 
       {/* LISTA DE EVENTOS DEL DÍA SELECCIONADO */}
-      <div className="flex flex-col gap-3 mt-2">
+      <div className="flex flex-col gap-3 mt-2 p-4 bg-white rounded-2xl">
         <div className="flex justify-between items-center px-2">
-          <h3 className="text-gray-800 font-medium capitalize">
-            {format(selectedDate, "EEEE d", { locale: es })}
+          <h3 className="text-gray-800 font-medium capitalize flex justify-center items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-blue-300"></div>
+            {format(selectedDate, "EEEE d", { locale: es })} de {format(selectedDate, "MMMM", { locale: es })}
           </h3>
-          <span className="bg-gray-200 text-gray-700 text-sm px-3 py-1 rounded-full">
+          <span className=" text-gray-700 text-sm px-3 py-1 rounded-full">
             {selectedDayEvents.length}{" "}
             {selectedDayEvents.length === 1 ? "Evento" : "Eventos"}
           </span>
