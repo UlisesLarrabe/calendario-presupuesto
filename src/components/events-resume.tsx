@@ -26,7 +26,7 @@ const EventsResume = () => {
       : [];
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 pt-2">
       <MonthSummary />
       <ChartSummary />
       <EventSummary events={incomeEvents} title="Ingresos" />

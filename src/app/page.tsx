@@ -14,15 +14,17 @@ export default async function Home() {
   }
   return (
     <div>
-      <header className="flex py-4 justify-between items-center p-2">
+      <header className="flex py-4 justify-between items-center p-2 bg-white border-b border-gray-200">
         <div className="flex items-center gap-2">
-          <CalendarIcon />
+          <div className="p-2 rounded-2xl bg-[#3399F1] ">
+            <CalendarIcon />
+          </div>
           <h1 className="text-3xl">MA&GA PF</h1>
         </div>
         <div>
           <Link
             href="/agregar"
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors cursor-pointer flex items-center gap-2"
+            className="bg-blue-500 text-sm text-white px-4 py-2 rounded-2xl hover:bg-blue-600 transition-colors cursor-pointer flex items-center gap-2"
           >
             <PlusIcon />
             Agregar Evento
