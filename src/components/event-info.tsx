@@ -126,7 +126,7 @@ const EventInfo = ({ event }: { event: Event }) => {
               href={`/modificar/${event.id}`}
               className="flex-1 px-4 py-2 rounded-lg bg-white/80 text-indigo-700 font-bold shadow hover:bg-indigo-100 hover:text-indigo-900 transition border border-white/30"
             >
-              <span className="inline-flex items-center gap-2">
+              <span className="flex gap-2 items-center">
                 <EditIcon />
                 Modificar
               </span>
@@ -135,7 +135,7 @@ const EventInfo = ({ event }: { event: Event }) => {
               href={`/repetir/${event.id}`}
               className="flex-1 px-4 py-2 rounded-lg bg-white/80 text-green-700 font-bold shadow hover:bg-green-100 hover:text-green-900 transition border border-white/30"
             >
-              <span className="inline-flex items-center gap-2">
+              <span className="flex gap-2 items-center">
                 <RepeatIcon />
                 Repetir
               </span>
@@ -145,7 +145,7 @@ const EventInfo = ({ event }: { event: Event }) => {
               onClick={handleDelete}
               disabled={loading}
             >
-              <span className="inline-flex items-center gap-2">
+              <span className="flex gap-2 items-center">
                 <XIcon />
                 Eliminar
               </span>
