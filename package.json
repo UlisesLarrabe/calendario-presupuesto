@@ -14,6 +14,7 @@
     "@fontsource-variable/onest": "^5.2.9",
     "@mui/material": "^7.2.0",
     "@mui/x-charts": "^8.9.0",
+    "@number-flow/react": "^0.6.2",
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.50.4",
     "@types/react-big-calendar": "^1.16.2",

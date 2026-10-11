@@ -1,6 +1,7 @@
 "use client";
 import useEventsContext from "@/hooks/use-events-context";
-import { useMemo } from "react";
+import NumberFlow from "@number-flow/react";
+import { useMemo, useEffect, useState } from "react";
 
 const MonthSummary = () => {
   const { events: monthEvents } = useEventsContext();
@@ -57,11 +58,21 @@ const MonthSummary = () => {
   };
 
   const InfoContainer = ({ title, value, color }: { title: string; value: number, color: string }) => {
+    const [animatedValue, setAnimatedValue] = useState(0);
+
+    useEffect(() => {
+      setAnimatedValue(value);
+    }, [value]);
     return (
       <div className="flex flex-col justify-center bg-white rounded-2xl p-4">
         <span className="text-xs text-gray-500 uppercase">{title}</span>
         <span className={`${color} font-bold text-lg`}>
-          ${value.toLocaleString("es-ES")}
+          <NumberFlow
+            value={animatedValue}
+            format={{ style: 'decimal', trailingZeroDisplay: 'auto' }}
+            prefix="$"
+            transformTiming={{ duration: 750, easing: 'ease' }}
+          />
         </span>
       </div>
     );
